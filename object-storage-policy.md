@@ -9,19 +9,12 @@ One of the ways to manage access rights to s3 storage is to use a bucket policy.
     - `"Action"` - may be string or slice of strings with Action rules for each resource, such as `"s3:ListBucket"`, `"s3:GetObject"`, `"s3:PutObject"`, etc
     - `"Effect"` - it is a string with `"Allow"` or `"Deny"` command to take effect
     - `"Principal"` - specifies the user, account, service, or other entity that is allowed or denied access to a resource. It may be a string or a map of strings in special format. For more information, see [Principal](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html)
+    
     To grant permission to everyone, also referred as anonymous access, you can set the wildcard ("*") as the Principal value.
 
-        Using 
-        ```json
-        "Principal": "*"
-        ``` 
-        with an `"Allow"` effect in a resource-based policy allows anyone, even if they’re not signed in to AWS, to access your resource
+        Using `"Principal": "*"` with an `"Allow"` effect in a resource-based policy allows anyone, even if they’re not signed in to AWS, to access your resource
 
-        Using 
-        ```json
-        "Principal" : { "AWS" : "*" }
-        ```
-        with an `"Allow"` effect in a resource-based policy allows any root user, IAM user, assumed-role session, or federated user in any account in the same partition to access your resource
+        Using `"Principal" : { "AWS" : "*" }` with an `"Allow"` effect in a resource-based policy allows any root user, IAM user, assumed-role session, or federated user in any account in the same partition to access your resource
         
         For anonymous users, these two methods are equivalent
 
