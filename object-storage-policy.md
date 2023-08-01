@@ -12,11 +12,11 @@ One of the ways to manage access rights to s3 storage is to use a bucket policy.
     
     To grant permission to everyone, also referred as anonymous access, you can set the wildcard ("*") as the Principal value.
 
-        Using `"Principal": "*"` with an `"Allow"` effect in a resource-based policy allows anyone, even if they’re not signed in to AWS, to access your resource
+    Using `"Principal": "*"` with an `"Allow"` effect in a resource-based policy allows anyone, even if they’re not signed in to AWS, to access your resource
 
-        Using `"Principal" : { "AWS" : "*" }` with an `"Allow"` effect in a resource-based policy allows any root user, IAM user, assumed-role session, or federated user in any account in the same partition to access your resource
+    Using `"Principal" : { "AWS" : "*" }` with an `"Allow"` effect in a resource-based policy allows any root user, IAM user, assumed-role session, or federated user in any account in the same partition to access your resource
         
-        For anonymous users, these two methods are equivalent
+    For anonymous users, these two methods are equivalent
 
     - `"Resource"` - Buckets and objects are resources for which you can allow or deny permissions. It may be string or slice of strings in special format.
     Amazon Resource Name (ARN) format identifies resources in AWS:
