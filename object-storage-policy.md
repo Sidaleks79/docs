@@ -1,4 +1,4 @@
-## Policy for object storage browser
+## Policy for S3 browser browser
 
 One of the ways to manage access rights to s3 storage is to use a bucket policy. It is a subset of the Amazon S3 policy language applied to buckets. It holds the policy rules of the bucket and all objects in it
 
@@ -27,14 +27,14 @@ One of the ways to manage access rights to s3 storage is to use a bucket policy.
         - __service__ - `s3`
         - __relative-id__ - `bucket_name` or `bucket_name/object_name`, or `bucket_name/*`, etc
     
-    The ARN format for object storage resources reduces to the following:
+    The ARN format for S3 resources reduces to the following:
     ```json
     arn:aws:s3:::bucket_name/obj_name
     ```
     For more information, see [Resource](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-arn-format.html)
-    - `"Condition"` - Conditions for when a policy is in effect. You can use AWS‐wide keys and Amazon S3‐specific keys to specify conditions in an object storage access policy. For more information, see [Condition key examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/amazon-s3-policy-keys.html)
+    - `"Condition"` - Conditions for when a policy is in effect. You can use AWS‐wide keys and Amazon S3‐specific keys to specify conditions in S3 access policy. For more information, see [Condition key examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/amazon-s3-policy-keys.html)
 
-### Template of policy structure for object storage browser we use
+### Template of policy structure for S3 browser we use
 
 ```json
 {

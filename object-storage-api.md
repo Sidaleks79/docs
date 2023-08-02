@@ -1,4 +1,4 @@
-## API for object storage browser
+## API for S3 browser
 
 ### 1) createBucket
 ---
