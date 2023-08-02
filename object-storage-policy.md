@@ -4,21 +4,21 @@ One of the ways to manage access rights to s3 storage is to use a bucket policy.
 
 ### These keywords are used to define policies
 
-- `"Version"` - date of version of the policy structure. Actual version is `"2012-10-17"`
+- `"Version"` - date of the version of the policy structure. Actual version is `"2012-10-17"`
 - `"Statement"` - slice of statements of policy rules, each statement consists of:
-    - `"Action"` - may be string or slice of strings with Action rules for each resource, such as `"s3:ListBucket"`, `"s3:GetObject"`, `"s3:PutObject"`, etc
-    - `"Effect"` - it is a string with `"Allow"` or `"Deny"` command to take effect
-    - `"Principal"` - specifies the user, account, service, or other entity that is allowed or denied access to a resource. It may be a string or a map of strings in special format. For more information, see [Principal](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html)
+    - `"Action"` - maybe string or slice of strings with Action rules for each resource, such as `"s3:ListBucket"`, `"s3:GetObject"`, `"s3:PutObject"`, etc
+    - `"Effect"` - it is a string with `"Allow"` or `"Deny"` commands to take effect
+    - `"Principal"` - specifies the user, account, service, or other entity that is allowed or denied access to a resource. It may be a string or a map of strings in a special format. For more information, see [Principal](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-bucket-user-policy-specifying-principal-intro.html)
     
-    To grant permission to everyone, also referred as anonymous access, you can set the wildcard ("*") as the Principal value.
+    To grant permission to everyone, also referred to as anonymous access, you can set the wildcard ("*") as the Principal value.
 
     Using `"Principal": "*"` with an `"Allow"` effect in a resource-based policy allows anyone, even if they’re not signed in to AWS, to access your resource
 
-    Using `"Principal" : { "AWS" : "*" }` with an `"Allow"` effect in a resource-based policy allows any root user, IAM user, assumed-role session, or federated user in any account in the same partition to access your resource
+    Using `"Principal": { "AWS": "*" }` with an `"Allow"` effect in a resource-based policy allows any root user, IAM user, assumed-role session, or federated user in any account in the same partition to access your resource
         
     For anonymous users, these two methods are equivalent
 
-    - `"Resource"` - Buckets and objects are resources for which you can allow or deny permissions. It may be string or slice of strings in special format.
+    - `"Resource"` - Buckets and objects are resources for which you can allow or deny permissions. It may be a string or slice of strings in a special format.
     Amazon Resource Name (ARN) format identifies resources in AWS:
         ```json
         arn:partition:service:region:namespace:relative-id
@@ -75,20 +75,20 @@ There are three states of visibility in our API
 #### 1) `private`
 
 - The default policy structure is empty and it means private access to resources.  
-- Also, we have private access if a statement for needed resource is absent or present with `"Effect"`: `"Deny"`.
+- Also, we have private access if a statement for the needed resource is absent or present with `"Effect"`: `"Deny"`.
 - If present two statements for one resource with `"Allow"` and `"Deny"` effects, `"Deny"` has more priority and the policy is `private`.
 
 #### 2) `public`
 
 we consider a resource `public` if:
 
-- its name is present in statement with `"Allow"` effect and in `"Principal"` section present wildcard ("*") value.
-- `"Action"`: `"s3:ListBucket"` is present for the checked bucket
-- `"Action"`: `"s3:GetObject"` is present for the checked object or for the all objects in a bucket
+its name is present in the statement with the `"Allow"` effect and the `"Principal"` section presents a wildcard ("*") value.
+`"Action"`: `"s3:ListBucket"` is present for the checked bucket
+`"Action"`: `"s3:GetObject"` is present for the checked object or for all objects in a bucket
 
 #### 3) `custom`
 
 we consider a resource `custom` if:
 
 - `"Version"` of the policy structure not actual. Meen not `"2012-10-17"` or keyword `"Version"` is absent
-- we did not recognize the ruleset as __private__ or __public__ for the given resource. It means that this resource may be as private and as public with using any other statements of policy.
+- we did not recognize the ruleset as __private__ or __public__ for the given resource. It means that this resource may be as private and as public with as using any other statements of policy.
